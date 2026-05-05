@@ -160,23 +160,54 @@
             color: #2c3e50;
         }
 
-        /*   СТИЛИ ФОРМЫ (из отдельного файла)   */
-        /* фиолетовый фон всей секции */
+        /*   НОВАЯ СЕТКА ДЛЯ КАРТОЧКИ И ФОРМЫ   */
+        .product-callback-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* две равные колонки */
+            gap: 30px;
+            padding: 20px;
+            background: white;
+            align-items: start;
+        }
+
+        /* На мобилке – одна колонка */
+        @media (max-width: 767px) {
+            .product-callback-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        /* Стили карточки товара (убираем фиксированную ширину и центрирование) */
+        .card {
+            width: 100%;  /* растягивается внутри колонки */
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background: #fff;
+            /* больше нет margin: 0 auto; чтобы не центрировать дополнительно */
+        }
+
+        /* Стили формы (убираем старый внешний отступ, добавляем внутренний отступ для контейнера) */
         .callback-section {
             background: #8f1b84;
             padding: 20px;
-            margin: 20px; /* отступы от соседних блоков */
+            border-radius: 8px;
+            height: 100%;
         }
-        /* карточка формы (белая) */
         .callback-form {
             width: 100%;
-            max-width: 420px;
-            margin: 0 auto;
+            max-width: 100%;
+            margin: 0;
             background: #ffffff;
             border-radius: 4px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
         }
+
+        /* Остальные стили формы и карточки не меняются, они уже были, 
+           но продублирую их для целостности (можно оставить как есть) */
         .form-header {
             background: #9a1d8f;
             color: white;
@@ -272,15 +303,7 @@
             }
         }
 
-        /*   СТИЛИ КАРТОЧКИ ТОВАРА (микросетка)   */
-        .card {
-            width: 320px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            background: #fff;
-            margin: 20px auto; /* центрирование */
-        }
+        /* Стили карточки товара */
         .image-wrapper {
             position: relative;
         }
@@ -414,56 +437,58 @@
         </div>
     </div>
 
-    <!--   ДОБАВЛЕННАЯ ПОЛЬЗОВАТЕЛЬСКАЯ ФОРМА (ЗАДАНИЕ 4)   -->
-    <div class="callback-section">
-        <div class="callback-form">
-            <button class="close-btn">&times;</button>
-            <div class="form-header">
-                <h2>ЗАКАЗАТЬ ЗВОНОК</h2>
-                <p>Укажите ваши контактные данные и мы свяжемся с вами в ближайшее время</p>
+    <!--   НОВАЯ СЕТКА: КАРТОЧКА ТОВАРА + ФОРМА   -->
+    <div class="product-callback-grid">
+        <!-- Левая колонка: карточка товара -->
+        <div style="padding: 0;">
+            <div class="card">
+                <div class="image-wrapper">
+                    <img src="https://moon.ru/upload/mf/md/d6/15/l01-2.jpg" alt="Кровать">
+                    <span class="favorite">♡</span>
+                </div>
+                <h4 class="title">Кровать Льери 160 Velvet Sand</h4>
+                <div class="price-block">
+                    <span class="price">1326 руб.</span>
+                    <span class="old-price">1489 руб.</span>
+                    <span class="discount">-10%</span>
+                </div>
+                <div class="info-block">
+                    <h5>Размеры</h5>
+                    <p>Длина <b>225 см</b> × Ширина <b>179 см</b> × Высота <b>112 см</b></p>
+                </div>
+                <div class="info-block">
+                    <h5>Спальное место</h5>
+                    <p>Длина <b>200 см</b> × Ширина <b>160 см</b></p>
+                </div>
+                <button class="btn">В корзину</button>
+                <a href="#" class="more">Подробнее о товаре</a>
             </div>
-            <form action="#" method="post">
-                <div class="form-group">
-                    <label for="name">Ваше имя</label>
-                    <input type="text" id="name" name="name">
-                </div>
-                <div class="form-group">
-                    <label for="phone">Номер телефона</label>
-                    <input type="tel" id="phone" name="phone" placeholder="+375">
-                </div>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="agree" checked>
-                    <label for="agree">Я даю согласие на обработку персональных данных</label>
-                </div>
-                <button type="submit" class="submit-btn">ЗАКАЗАТЬ ЗВОНОК</button>
-            </form>
         </div>
-    </div>
 
-    <!--   ДОБАВЛЕННАЯ МИКРОСЕТКА (КАРТОЧКА ТОВАРА)   -->
-    <div style="padding: 20px; text-align: center;">
-        <h3> Популярный товар</h3>
-        <div class="card">
-            <div class="image-wrapper">
-                <img src="https://moon.ru/upload/mf/md/d6/15/l01-2.jpg" alt="Кровать">
-                <span class="favorite">♡</span>
+        <!-- Правая колонка: форма заказа звонка -->
+        <div class="callback-section">
+            <div class="callback-form">
+                <button class="close-btn">&times;</button>
+                <div class="form-header">
+                    <h2>ЗАКАЗАТЬ ЗВОНОК</h2>
+                    <p>Укажите ваши контактные данные и мы свяжемся с вами в ближайшее время</p>
+                </div>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Номер телефона</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+375">
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="agree" checked>
+                        <label for="agree">Я даю согласие на обработку персональных данных</label>
+                    </div>
+                    <button type="submit" class="submit-btn">ЗАКАЗАТЬ ЗВОНОК</button>
+                </form>
             </div>
-            <h4 class="title">Кровать Льери 160 Velvet Sand</h4>
-            <div class="price-block">
-                <span class="price">1326 руб.</span>
-                <span class="old-price">1489 руб.</span>
-                <span class="discount">-10%</span>
-            </div>
-            <div class="info-block">
-                <h5>Размеры</h5>
-                <p>Длина <b>225 см</b> × Ширина <b>179 см</b> × Высота <b>112 см</b></p>
-            </div>
-            <div class="info-block">
-                <h5>Спальное место</h5>
-                <p>Длина <b>200 см</b> × Ширина <b>160 см</b></p>
-            </div>
-            <button class="btn">В корзину</button>
-            <a href="#" class="more">Подробнее о товаре</a>
         </div>
     </div>
 
@@ -471,9 +496,8 @@
     <footer>
         <div class="footer-content">
             <div class="copy">
-                &copy; 2025 МойСайт. Все права защищены.
+                &copy; 2025 Вариант 2. Баталенок Яна
             </div>
-            
         </div>
     </footer>
 </div>
