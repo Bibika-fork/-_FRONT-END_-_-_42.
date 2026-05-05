@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="верстка, фиксированный макет, flexbox, grid">
+    <title>Задание 2</title>
+    <style>
+        /* ОБНУЛЕНИЕ И box-sizing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #e9ecef;
+            padding: 20px;
+        }
+
+        /* резиновый КОНТЕЙНЕР */
+        .container {
+            width: 100%;               /* резиновый на всю ширину */
+            max-width: 100%;           /* убираем ограничение 1400px */
+            margin: 0 auto;
+        }
+
+        /* СТИЛИ ДЛЯ ВСЕХ БЛОКОВ (разные фоны) */
+        header, footer, nav, .block1, .block2, .block3, .block4, .block5, .block6 {
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+
+        header { background: #d4e6f1; }   /* шапка */
+        nav    { background: #f9e79f; }   /* меню */
+        footer { background: #d5f5e3; }   /* подвал */
+
+        .block1 { background: #fadbd8; }
+        .block2 { background: #d6eaf8; }
+        .block3 { background: #d1f2eb; }
+        .block4 { background: #fdebd0; }
+        .block5 { background: #e8daef; }
+        .block6 { background: #fcf3cf; }
+
+        /* СЕМАНТИЧЕСКАЯ СЕТКА (GRID) */
+        .main-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Строка 1: блоки 1, 4, 5 */
+        .row1 {
+            display: grid;
+            grid-template-columns: 30% 40% 1fr;   /* 1fr = оставшаяся часть (30%) */
+            gap: 20px;
+        }
+
+        /* Строка 2: блок 2 – должен быть 30% от ширины окна */
+        .row2 {
+            width: 30%;                          /* ограничиваем ширину 30% */
+            margin-top: 0;                       /* отступ уже задан в .main-grid gap */
+        }
+
+         /* Строка 3: блоки 3 и 6 – 30% и оставшаяся часть */
+        .row3 {
+            display: grid;
+            grid-template-columns: 30% 1fr;      /* 30% и 70% */
+            gap: 20px;
+        }
+
+        /* ГИБКИЕ ИЗОБРАЖЕНИЯ */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ГОРИЗОНТАЛЬНОЕ МЕНЮ */
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: bold;
+            padding: 5px 10px;
+        }
+        nav a:hover { background: #f1c40f; border-radius: 5px; }
+
+        /* ПОДВАЛ: копирайт + соцсети */
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .social a {
+            margin-left: 15px;
+            text-decoration: none;
+            color: #2c3e50;
+        }
+
+        
+
+        /* ПРОСТАЯ ФОРМА */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .submit-btn {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- ШАПКА С ЛОГОТИПОМ И МЕНЮ -->
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div class="logo">
+                <h2>МойСайт</h2>   <!-- Логотип -->
+            </div>
+            <!-- НАВИГАЦИЯ (5 пунктов) -->
+            <nav>
+                <ul>
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Услуги</a></li>
+                    <li><a href="#">Портфолио</a></li>
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ОСНОВНАЯ СЕТКА ПО ЗАДАНИЮ -->
+    <div class="main-grid">
+        <!-- Первая строка: блоки 1, 4, 5 -->
+        <div class="row1">
+            <div class="block1">
+                <h3>Блок 1</h3>
+                <img src="https://placehold.co/350x200" alt="Изображение 1">
+                <p>Текстовая заглушка. Здесь может быть ваше содержание.</p>
+            </div>
+            <div class="block4">
+                <h3>Блок 4</h3>
+                <img src="https://placehold.co/500x200" alt="Изображение 4">
+                <p>Более широкий блок. Описание товара или услуги.</p>
+            </div>
+            <div class="block5">
+                <h3>Блок 5</h3>
+                <img src="https://placehold.co/350x200" alt="Изображение 5">
+                <p>Дополнительный контент.</p>
+            </div>
+        </div>
+
+        <!-- Вторая строка: блок 2 -->
+        <div class="row2">
+            <div class="block2">
+                <h3>Блок 2</h3>
+                <img src="https://placehold.co/1140x200" alt="Изображение 2">
+                <p>Текст для блока 2. Здесь можно разместить акцию или баннер.</p>
+            </div>
+        </div>
+
+        <!-- Третья строка: блоки 3 и 6 -->
+        <div class="row3">
+            <div class="block3">
+                <h3>Блок 3</h3>
+                <img src="https://placehold.co/350x200" alt="Изображение 3">
+                <p>Новости или преимущества.</p>
+            </div>
+            <div class="block6">
+                <h3>Блок 6</h3>
+                <img src="https://placehold.co/350x200" alt="Изображение 6">
+                <p>Контакты или отзывы.</p>
+            </div>
+        </div>
+    </div>
+   
+
+    <!-- ПОДВАЛ С КОПИРАЙТОМ И СОЦСЕТЯМИ -->
+    <footer>
+        <div class="footer-content">
+            <div class="copy">
+                &copy; 2025 МойСайт. Все права защищены.
+            </div>
+            <div class="social">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+                <a href="#">VK</a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="адаптивная верстка, grid, flexbox, макет, вариант 0">
+    <title>Задание 3 - Адаптивный макет</title>
+    <style>
+        /* ---------- ОБЩИЕ СТИЛИ + СБРОС ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #e9ecef;
+            padding: 20px;
+        }
+
+        /* РЕЗИНОВЫЙ КОНТЕЙНЕР (100% ширины) */
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* ЦВЕТА ДЛЯ БЛОКОВ (разные, для наглядности) */
+        header, footer, nav, .block1, .block2, .block3, .block4, .block5, .block6 {
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        header { background: #d4e6f1; }  /* шапка */
+        nav    { background: #f9e79f; }  /* меню */
+        footer { background: #d5f5e3; }  /* подвал */
+        .block1 { background: #fadbd8; }
+        .block2 { background: #d6eaf8; }
+        .block3 { background: #d1f2eb; }
+        .block4 { background: #fdebd0; }
+        .block5 { background: #e8daef; }
+        .block6 { background: #fcf3cf; }
+
+        /* ---------- ГИБКИЕ ИЗОБРАЖЕНИЯ ---------- */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ---------- СЕТКА НА GRID (десктопная версия по умолчанию) ---------- */
+        .main-grid {
+            display: grid;
+            gap: 20px;
+            padding: 20px;
+            grid-template-columns: 30% 40% 1fr;
+            grid-template-areas: 
+                "b1   b4   b5"
+                "b2   b2   b2"
+                "b3   b3   b6";
+        }
+
+        /* Привязываем блоки к именованным областям */
+        .block1 { grid-area: b1; }
+        .block2 { grid-area: b2; }
+        .block3 { grid-area: b3; }
+        .block4 { grid-area: b4; }
+        .block5 { grid-area: b5; }
+        .block6 { grid-area: b6; }
+
+        /* ---------- ПЛАНШЕТНАЯ ВЕРСИЯ (768px – 1024px) ---------- */
+        @media (max-width: 1024px) and (min-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas: 
+                    "b1   b4"
+                    "b2   b2"
+                    "b3   b3"
+                    "b5   b6";
+            }
+        }
+
+        /* ---------- МОБИЛЬНАЯ ВЕРСИЯ (<768px) ---------- */
+        @media (max-width: 767px) {
+            .main-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+            /* Скрываем блок 4 */
+            .block4 {
+                display: none;
+            }
+            /* Порядок блоков: 1, 2, 3, 5, 6 */
+            .block1 { order: 1; width: 100%; }
+            .block2 { order: 2; width: 100%; }
+            .block3 { order: 3; width: 100%; }
+            .block5 { order: 4; width: calc(50% - 10px); }  /* 5 и 6 в одну строку */
+            .block6 { order: 5; width: calc(50% - 10px); }
+        }
+
+        /* ---------- СТИЛИ МЕНЮ (горизонтальное, с бургером для мобилки) ---------- */
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: bold;
+            padding: 5px 10px;
+        }
+        nav a:hover { background: #f1c40f; border-radius: 5px; }
+
+        .burger {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            user-select: none;
+        }
+        #burger-toggle {
+            display: none;
+        }
+
+        @media (max-width: 767px) {
+            .burger {
+                display: block;
+                text-align: right;
+                padding: 10px;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                gap: 10px;
+                background: #f9e79f;
+                padding: 10px;
+                border-radius: 8px;
+            }
+            #burger-toggle:checked ~ nav ul {
+                display: flex;
+            }
+        }
+
+        /* ---------- ПОДВАЛ ---------- */
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .social a {
+            margin-left: 15px;
+            text-decoration: none;
+            color: #2c3e50;
+        }
+
+        
+
+        /* ---------- ФОРМА ---------- */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .submit-btn {
+            background: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- ШАПКА С ЛОГОТИПОМ И МЕНЮ -->
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div class="logo">
+                <h2> МойСайт</h2>   <!-- Логотип -->
+            </div>
+            <!-- Бургер-меню: чекбокс + label -->
+            <input type="checkbox" id="burger-toggle">
+            <label for="burger-toggle" class="burger">☰</label>
+            <!-- НАВИГАЦИЯ (5 пунктов) -->
+            <nav>
+                <ul>
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Услуги</a></li>
+                    <li><a href="#">Портфолио</a></li>
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ОСНОВНАЯ СЕТКА (блоки 1–6) -->
+    <div class="main-grid">
+        <div class="block1">
+            <h3>Блок 1 (30% / 1-я позиция)</h3>
+            <img src="https://placehold.co/350x200" alt="Изображение 1">
+            <p>Текстовая заглушка для блока 1.</p>
+        </div>
+        <div class="block4">
+            <h3>Блок 4 (40% / широкая колонка)</h3>
+            <img src="https://placehold.co/500x200" alt="Изображение 4">
+            <p>Основной контент, новости, акции.</p>
+        </div>
+        <div class="block5">
+            <h3>Блок 5 (оставшаяся часть)</h3>
+            <img src="https://placehold.co/350x200" alt="Изображение 5">
+            <p>Дополнительные материалы.</p>
+        </div>
+        <div class="block2">
+            <h3>Блок 2 (30% ширины)</h3>
+            <img src="https://placehold.co/1140x200" alt="Изображение 2">
+            <p>Этот блок занимает 30% от родителя (на десктопе).</p>
+        </div>
+        <div class="block3">
+            <h3>Блок 3 (30%)</h3>
+            <img src="https://placehold.co/350x200" alt="Изображение 3">
+            <p>Новости или преимущества.</p>
+        </div>
+        <div class="block6">
+            <h3>Блок 6 (оставшаяся часть)</h3>
+            <img src="https://placehold.co/350x200" alt="Изображение 6">
+            <p>Контакты, отзывы, карта.</p>
+        </div>
+    </div>
+
+
+    <!-- ПОДВАЛ С КОПИРАЙТОМ И СОЦСЕТЯМИ -->
+    <footer>
+        <div class="footer-content">
+            <div class="copy">
+                &copy; 2025 МойСайт. Все права защищены.
+            </div>
+            <div class="social">
+                <a href="#"> Facebook</a>
+                <a href="#"> Instagram</a>
+                <a href="#"> Twitter</a>
+                <a href="#"> VK</a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

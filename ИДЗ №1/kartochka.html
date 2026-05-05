@@ -1,0 +1,125 @@
+<div style="padding: 20px; font-family: Arial, sans-serif;">
+    <div class="card">
+        <div class="image-wrapper">
+            <img src="https://moon.ru/upload/mf/md/d6/15/l01-2.jpg" alt="Кровать">
+            <span class="favorite">♡</span>
+        </div>
+
+        <h4 class="title">Кровать Льери 160 Velvet Sand</h4>
+
+        <div class="price-block">
+            <span class="price">1326 руб.</span>
+            <span class="old-price">1489 руб.</span>
+            <span class="discount">-10%</span>
+        </div>
+
+        <div class="info-block">
+            <h5>Размеры</h5>
+            <p>Длина <b>225 см</b> × Ширина <b>179 см</b> × Высота <b>112 см</b></p>
+        </div>
+
+        <div class="info-block">
+            <h5>Спальное место</h5>
+            <p>Длина <b>200 см</b> × Ширина <b>160 см</b></p>
+        </div>
+
+        <button class="btn">В корзину</button>
+        <a href="#" class="more">Подробнее о товаре</a>
+    </div>
+</div>
+
+<style>
+.card { /*основной контейнер карточки*/
+    width: 320px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    background: #fff;
+}
+
+.image-wrapper { /*позиционирование картинки*/
+    position: relative;
+}
+
+.image-wrapper img { /*картинка */
+    width: 100%;
+    border-radius: 6px;
+}
+
+.favorite { /*размер иконки "Избранное" */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #777;
+    cursor: pointer;
+}
+
+.title { /*Название товара*/
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.price-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.price {
+    color: #e53935;
+    font-weight: bold;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.discount {
+    background: #eee;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.info-block {
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #444;
+}
+
+.info-block h5 {
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+.btn { /*кнопка в корзину */
+    width: 100%;
+    padding: 10px;
+    background: #555;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn:hover { /*эффект при наведении на кнопку */
+    background: #333;
+}
+
+.more {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #777;
+    text-decoration: none;
+}
+
+.more:hover {
+    text-decoration: underline;
+}
+</style>
