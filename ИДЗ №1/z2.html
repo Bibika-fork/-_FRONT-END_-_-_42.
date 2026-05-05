@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="верстка, фиксированный макет, flexbox, grid">
-    <title>Задание 2</title>
+    <title>Задание 2 (исправленное)</title>
     <style>
-        /* ОБНУЛЕНИЕ И box-sizing */
         * {
             margin: 0;
             padding: 0;
@@ -16,25 +15,24 @@
         body {
             font-family: Arial, sans-serif;
             background: #e9ecef;
-            padding: 20px;
+            padding: 20px;  /* единый отступ от краёв окна */
         }
 
-        /* резиновый КОНТЕЙНЕР */
         .container {
-            width: 100%;               /* резиновый на всю ширину */
-            max-width: 100%;           /* убираем ограничение 1400px */
+            width: 100%;
+            max-width: 100%;
             margin: 0 auto;
         }
 
-        /* СТИЛИ ДЛЯ ВСЕХ БЛОКОВ (разные фоны) */
+        /* Все основные блоки получают одинаковый внутренний отступ */
         header, footer, nav, .block1, .block2, .block3, .block4, .block5, .block6 {
             padding: 20px;
             border: 1px solid #ddd;
         }
 
-        header { background: #d4e6f1; }   /* шапка */
-        nav    { background: #f9e79f; }   /* меню */
-        footer { background: #d5f5e3; }   /* подвал */
+        header { background: #d4e6f1; }
+        nav    { background: #f9e79f; }
+        footer { background: #d5f5e3; }
 
         .block1 { background: #fadbd8; }
         .block2 { background: #d6eaf8; }
@@ -43,42 +41,48 @@
         .block5 { background: #e8daef; }
         .block6 { background: #fcf3cf; }
 
-        /* СЕМАНТИЧЕСКАЯ СЕТКА (GRID) */
+        /* Основная сетка – вертикальный флекс (убрали лишний padding) */
         .main-grid {
             display: flex;
             flex-direction: column;
             gap: 20px;
-            padding: 20px;
+            /* padding удалён, чтобы отступы были только от body */
         }
 
-        /* Строка 1: блоки 1, 4, 5 */
+        /* Строка 1 – грид на 3 колонки */
         .row1 {
             display: grid;
-            grid-template-columns: 30% 40% 1fr;   /* 1fr = оставшаяся часть (30%) */
+            grid-template-columns: 30% 40% 1fr;
             gap: 20px;
         }
 
-        /* Строка 2: блок 2 – должен быть 30% от ширины окна */
-        .row2 {
-            width: 30%;                          /* ограничиваем ширину 30% */
-            margin-top: 0;                       /* отступ уже задан в .main-grid gap */
+        /* ВАЖНО: запрещаем колонкам расширяться из-за контента */
+        .row1 > *,
+        .row3 > * {
+            min-width: 0;
+            overflow-wrap: break-word;
         }
 
-         /* Строка 3: блоки 3 и 6 – 30% и оставшаяся часть */
+        /* Строка 2 – блок на всю ширину */
+        .row2 {
+            /* без ограничений */
+        }
+
+        /* Строка 3 – грид на 2 колонки */
         .row3 {
             display: grid;
-            grid-template-columns: 30% 1fr;      /* 30% и 70% */
+            grid-template-columns: 30% 1fr;
             gap: 20px;
         }
 
-        /* ГИБКИЕ ИЗОБРАЖЕНИЯ */
+        /* Гибкие изображения */
         img {
             max-width: 100%;
             height: auto;
             display: block;
         }
 
-        /* ГОРИЗОНТАЛЬНОЕ МЕНЮ */
+        /* Горизонтальное меню */
         nav ul {
             list-style: none;
             display: flex;
@@ -92,9 +96,12 @@
             font-weight: bold;
             padding: 5px 10px;
         }
-        nav a:hover { background: #f1c40f; border-radius: 5px; }
+        nav a:hover {
+            background: #f1c40f;
+            border-radius: 5px;
+        }
 
-        /* ПОДВАЛ: копирайт + соцсети */
+        /* Подвал */
         .footer-content {
             display: flex;
             justify-content: space-between;
@@ -108,9 +115,7 @@
             color: #2c3e50;
         }
 
-        
-
-        /* ПРОСТАЯ ФОРМА */
+        /* Форма (если понадобится) */
         .form-group {
             margin-bottom: 15px;
         }
@@ -127,18 +132,23 @@
             border: none;
             cursor: pointer;
         }
+
+        /* Для совсем узких экранов – убираем горизонтальную прокрутку */
+        @media (max-width: 600px) {
+            body {
+                overflow-x: auto;
+            }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- ШАПКА С ЛОГОТИПОМ И МЕНЮ -->
     <header>
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
             <div class="logo">
-                <h2>МойСайт</h2>   <!-- Логотип -->
+                <h2>МойСайт</h2>
             </div>
-            <!-- НАВИГАЦИЯ (5 пунктов) -->
             <nav>
                 <ul>
                     <li><a href="#">Главная</a></li>
@@ -151,9 +161,8 @@
         </div>
     </header>
 
-    <!-- ОСНОВНАЯ СЕТКА ПО ЗАДАНИЮ -->
     <div class="main-grid">
-        <!-- Первая строка: блоки 1, 4, 5 -->
+        <!-- строка 1: блоки 1, 4, 5 -->
         <div class="row1">
             <div class="block1">
                 <h3>Блок 1</h3>
@@ -172,7 +181,7 @@
             </div>
         </div>
 
-        <!-- Вторая строка: блок 2 -->
+        <!-- строка 2: блок 2 (на всю ширину) -->
         <div class="row2">
             <div class="block2">
                 <h3>Блок 2</h3>
@@ -181,7 +190,7 @@
             </div>
         </div>
 
-        <!-- Третья строка: блоки 3 и 6 -->
+        <!-- строка 3: блоки 3 и 6 -->
         <div class="row3">
             <div class="block3">
                 <h3>Блок 3</h3>
@@ -195,13 +204,11 @@
             </div>
         </div>
     </div>
-   
 
-    <!-- ПОДВАЛ С КОПИРАЙТОМ И СОЦСЕТЯМИ -->
     <footer>
         <div class="footer-content">
             <div class="copy">
-                &copy; 2025 МойСайт. Все права защищены.
+                &copy; Вариант 2. Баталенок Яна
             </div>
             <div class="social">
                 <a href="#">Facebook</a>
