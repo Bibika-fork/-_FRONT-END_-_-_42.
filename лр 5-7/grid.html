@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>GRID ЛР№6</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial;
+    margin:20px;
+    background:#f4f4f4;
+}
+
+.section{
+    background:white;
+    border:2px solid #ccc;
+    padding:20px;
+    margin-bottom:30px;
+}
+
+h2{
+    margin-bottom:15px;
+}
+
+.grid{
+    display:grid;
+    border:2px dashed #999;
+    padding:10px;
+    min-height:150px;
+}
+
+.item{
+    background:steelblue;
+    color:white;
+    padding:20px;
+    text-align:center;
+    border:2px solid #0b3d66;
+}
+
+/* ГОТОВЫЕ СЕТКИ */
+
+.grid2{
+    grid-template-columns:repeat(2,1fr); /*сетка из двух колонок*/
+}
+
+.grid3{
+    grid-template-columns:repeat(3,1fr); /*сетка из 3 колонок */
+}
+
+.grid4{
+    grid-template-columns:repeat(4,1fr); /*сетка из 4 колонок*/
+}
+
+/* GAP */
+
+.gap20{
+    gap:20px; /*задает расстояние между элементами грид*/
+}
+
+/* ВЫРАВНИВАНИЕ */
+
+.center{
+    justify-content:center;
+    align-content:center;
+}
+
+/* ВЫСОТА */
+
+.h300{
+    height:300px;
+}
+
+</style>
+</head>
+<body>
+    <!-- КНОПКА ПЕРЕХОДА НА GRID -->
+<div class="section" style="text-align:center;">
+
+    <a href="flex.html" class="btn">
+        Вернуться к FLEX ЛР№5
+    </a>
+
+</div>
+  
+<!-- display:grid -->  
+
+<div class="section"> 
+
+    <h2>1. display:grid</h2> <!-- контейнер с элементами грид-->
+
+    <div class="grid grid3 gap20">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+    </div>
+
+</div>
+
+  
+<!-- repeat -->  
+
+<div class="section"> 
+
+    <h2>2. repeat()</h2> <!-- для сокращённой записи повторяющихся значений-->
+
+    <div class="grid grid4 gap20"> <!-- грид контейнер -->
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+
+    </div>
+
+</div>
+
+  
+<!-- minmax -->  
+
+<div class="section">
+
+    <h2>3. minmax()</h2>
+
+    <div class="grid gap20"
+         style="
+            grid-template-columns:
+            repeat(3,minmax(100px,1fr));
+         ">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+    </div>
+
+</div>
+
+  
+<!-- justify-content + align-content -->  
+
+<div class="section">
+
+    <h2>4. justify-content + align-content</h2> <!-- заполнение определенной части контенера-->
+
+    <div class="grid grid2 center h300">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+
+    </div>
+
+</div>
+
+  
+<!-- justify-items + align-items -->  
+
+<div class="section">
+
+    <h2>5. justify-items + align-items</h2>
+
+    <div class="grid grid3 h300"
+         style="
+            justify-items:center;
+            align-items:center;
+         ">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+    </div>
+
+</div>
+
+  
+<!-- grid-template-areas -->  
+
+<div class="section">
+
+    <h2>6. grid-template-areas</h2> <!--макет сетки в виде именованных областей-->
+
+    <div class="grid"
+         style="
+            grid-template-columns:200px 1fr;
+
+            grid-template-areas:
+            'header header'
+            'sidebar content'
+            'footer footer';
+
+            gap:10px;
+         ">
+
+        <div class="item"
+             style="grid-area:header;">
+             HEADER
+        </div>
+
+        <div class="item"
+             style="grid-area:sidebar;">
+             SIDEBAR
+        </div>
+
+        <div class="item"
+             style="grid-area:content;">
+             CONTENT
+        </div>
+
+        <div class="item"
+             style="grid-area:footer;">
+             FOOTER
+        </div>
+
+    </div>
+
+</div>
+
+  
+<!-- grid-column --> 
+
+<div class="section">
+
+    <h2>7. grid-column</h2> <!--для столбцов-->
+
+    <div class="grid grid4 gap20">
+
+        <div class="item"
+             style="grid-column:1/4;">
+             1/4
+        </div>
+
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+    </div>
+
+</div>
+
+
+<!-- grid-row -->
+  
+
+<div class="section">
+
+    <h2>8. grid-row</h2> <!--для строк-->
+
+    <div class="grid grid3 gap20">
+
+        <div class="item"
+             style="grid-row:1/3;">
+             1/3
+        </div>
+
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

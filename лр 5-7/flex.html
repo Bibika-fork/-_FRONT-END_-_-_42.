@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ЛР №5 — Flexbox и блочная модель</title>
+
+<style>
+
+/* ОБЩИЕ СТИЛИ*/
+
+/* box-sizing:
+   width и height теперь включают padding и border */
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    margin:20px;
+    color:#222;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.section{
+    background:white;
+    border:2px solid #ccc;
+    padding:20px;
+    margin-bottom:30px;
+}
+
+.title{
+    font-size:24px;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
+.desc{
+    color:#555;
+    margin-bottom:20px;
+}
+
+/*ОБЩИЕ FLEX-ЭЛЕМЕНТЫ */
+
+.box{
+    border:2px dashed #999;
+    padding:10px;
+    margin-top:10px;
+    min-height:120px;
+    background:#fafafa;
+}
+
+.item{
+    background:steelblue;
+    color:white;
+    border:2px solid #0b3d66;
+    padding:15px;
+    text-align:center;
+    margin:5px;
+}
+
+.small{
+    width:70px;
+    height:50px;
+}
+
+.wide{
+    width:120px;
+}
+
+.tall{
+    height:80px;
+}
+
+/* FIXED GRID */
+
+.grid-fixed{
+
+    /* фиксированная ширина */
+    width:960px;
+
+    margin:auto;
+
+    display:flex;
+
+    /* перенос элементов */
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    border:2px solid #999;
+    padding:10px;
+}
+
+.grid-fixed .cell{
+
+    /* фиксированный размер */
+    width:300px;
+    height:120px;
+
+    background:steelblue;
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size:28px;
+}
+
+/* FLUID GRID */
+
+.grid-fluid{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    border:2px solid #999;
+    padding:10px;
+}
+
+.grid-fluid .cell{
+
+    /* РЕЗИНОВАЯ СЕТКА
+       элементы растягиваются */
+    flex:1 1 calc(33.333% - 10px);
+
+    min-width:200px;
+
+    height:120px;
+
+    background:tomato;
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size:28px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>ЛР №5 — Блочная модель и Flexbox</h1>
+<!-- КНОПКА ПЕРЕХОДА НА GRID -->
+<div class="section" style="text-align:center;">
+
+    <a href="grid.html" class="btn">
+        Перейти к GRID ЛР№6
+    </a>
+
+</div>
+
+<!--1. БЛОЧНАЯ МОДЕЛЬ -->
+
+<div class="section">
+
+    <div class="title">1. Блочная модель (Box Model)</div>
+
+    <div class="desc">
+        Демонстрация margin, padding, border и box-sizing.
+    </div>
+
+    <div style="
+        width:300px;
+
+        /* внутренний отступ */
+        padding:30px;
+
+        /* внешний отступ */
+        margin:40px;
+
+        border:10px solid steelblue;
+
+        background:lightblue;
+
+        box-sizing:border-box;
+    ">
+        BLOCK
+    </div>
+
+</div>
+
+<!-- СВОЙСТВА FLEX-КОНТЕЙНЕРА -->
+
+<h1>Свойства Flex-контейнера</h1>
+
+<!-- 2 -->
+<div class="section">
+
+    <div class="title">2. display:flex</div>
+
+    <div class="desc">
+        Элементы становятся flex-элементами.
+    </div>
+
+    <div class="box" style="display:flex;">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+    </div>
+</div>
+
+<!-- 3 -->
+<div class="section">
+
+    <div class="title">3. flex-direction</div>
+
+    <div class="desc">
+        Направление элементов.
+    </div>
+
+    <h3>row</h3>
+
+    <div class="box" style="display:flex; flex-direction:row;">
+
+        <div class="item">A</div>
+        <div class="item">B</div>
+        <div class="item">C</div>
+
+    </div>
+
+    <h3>column</h3>
+
+    <div class="box" style="display:flex; flex-direction:column;">
+
+        <div class="item">A</div>
+        <div class="item">B</div>
+        <div class="item">C</div>
+
+    </div>
+
+</div>
+
+<!-- 4 -->
+<div class="section">
+
+    <div class="title">4. flex-wrap</div>
+
+    <div class="desc">
+        Перенос элементов на новую строку.
+    </div>
+
+    <div class="box"
+         style="
+            display:flex;
+            flex-wrap:wrap;
+            width:300px;
+         ">
+
+        <div class="item wide">1</div>
+        <div class="item wide">2</div>
+        <div class="item wide">3</div>
+        <div class="item wide">4</div>
+
+    </div>
+
+</div>
+
+<!-- 5 -->
+<div class="section">
+
+    <div class="title">5. flex-flow</div>
+
+    <div class="desc">
+        Сокращение для flex-direction и flex-wrap.
+    </div>
+
+    <div class="box"
+         style="
+            display:flex;
+            flex-flow:row wrap;
+            width:300px;
+         ">
+
+        <div class="item wide">1</div>
+        <div class="item wide">2</div>
+        <div class="item wide">3</div>
+        <div class="item wide">4</div>
+
+    </div>
+
+</div>
+
+<!-- 6 -->
+<div class="section">
+
+    <div class="title">6. justify-content</div>
+
+    <div class="desc">
+        Выравнивание по главной оси.
+    </div>
+
+    <h3>center</h3>
+
+    <div class="box"
+         style="
+            display:flex;
+            justify-content:center;
+         ">
+
+        <div class="item small">1</div>
+        <div class="item small">2</div>
+        <div class="item small">3</div>
+
+    </div>
+
+    <h3>space-between</h3>
+
+    <div class="box"
+         style="
+            display:flex;
+            justify-content:space-between;
+         ">
+
+        <div class="item small">1</div>
+        <div class="item small">2</div>
+        <div class="item small">3</div>
+
+    </div>
+
+</div>
+
+<!-- 7 -->
+<div class="section">
+
+    <div class="title">7. align-content</div>
+
+    <div class="desc">
+        Работает при flex-wrap и нескольких строках.
+    </div>
+
+    <div class="box"
+         style="
+            display:flex;
+            flex-wrap:wrap;
+            align-content:space-between;
+
+            height:300px;
+            width:320px;
+         ">
+
+        <div class="item wide">1</div>
+        <div class="item wide">2</div>
+        <div class="item wide">3</div>
+        <div class="item wide">4</div>
+
+    </div>
+
+</div>
+
+<!-- 8 -->
+<div class="section">
+
+    <div class="title">8. align-items</div>
+
+    <div class="desc">
+        Выравнивание по поперечной оси.
+    </div>
+
+    <div class="box"
+         style="
+            display:flex;
+            align-items:center;
+            height:150px;
+         ">
+
+        <div class="item small">1</div>
+        <div class="item tall">2</div>
+        <div class="item small">3</div>
+
+    </div>
+
+</div>
+
+<!-- 9 -->
+<div class="section">
+
+    <div class="title">9. column-gap</div>
+
+    <div class="desc">
+        Отступ между колонками.
+    </div>
+
+    <div class="box"
+         style="
+            display:flex;
+            column-gap:40px;
+         ">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+    </div>
+
+</div>
+
+<!-- 10 -->
+<div class="section">
+
+    <div class="title">10. gap</div>
+
+    <div class="desc">
+        Отступы между строками и колонками.
+    </div>
+
+    <div class="box"
+         style="
+            display:flex;
+            flex-wrap:wrap;
+            gap:20px;
+            width:320px;
+         ">
+
+        <div class="item wide">1</div>
+        <div class="item wide">2</div>
+        <div class="item wide">3</div>
+        <div class="item wide">4</div>
+
+    </div>
+
+</div>
+
+<!--  СВОЙСТВА FLEX-ЭЛЕМЕНТОВ -->
+
+<h1>Свойства Flex-элементов</h1>
+
+<!-- 11 -->
+<div class="section">
+
+    <div class="title">11. flex-grow</div>
+
+    <div class="desc">
+        Элементы растягиваются.
+    </div>
+
+    <div class="box" style="display:flex;">
+
+        <div class="item" style="flex-grow:1;">grow 1</div>
+
+        <div class="item" style="flex-grow:2;">grow 2</div>
+
+        <div class="item" style="flex-grow:3;">grow 3</div>
+
+    </div>
+
+</div>
+
+<!-- 12 -->
+<div class="section">
+
+    <div class="title">12. flex-shrink</div>
+
+    <div class="desc">
+        Сжатие элементов.
+    </div>
+
+    <div class="box"
+         style="
+            display:flex;
+            width:300px;
+         ">
+
+        <div class="item"
+             style="
+                width:200px;
+                flex-shrink:1;
+             ">
+
+            shrink 1
+
+        </div>
+
+        <div class="item"
+             style="
+                width:200px;
+                flex-shrink:3;
+             ">
+
+            shrink 3
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 13 -->
+<div class="section">
+
+    <div class="title">13. flex-basis</div>
+
+    <div class="desc">
+        Начальный размер элемента.
+    </div>
+
+    <div class="box" style="display:flex;">
+
+        <div class="item" style="flex-basis:100px;">
+            100px
+        </div>
+
+        <div class="item" style="flex-basis:200px;">
+            200px
+        </div>
+
+        <div class="item" style="flex-basis:300px;">
+            300px
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 14 -->
+<div class="section">
+
+    <div class="title">14. flex</div>
+
+    <div class="desc">
+        Сокращение:
+        flex-grow flex-shrink flex-basis
+    </div>
+
+    <div class="box" style="display:flex;">
+
+        <div class="item" style="flex:1 1 100px;">
+            1 1 100px
+        </div>
+
+        <div class="item" style="flex:2 1 100px;">
+            2 1 100px
+        </div>
+
+        <div class="item" style="flex:3 1 100px;">
+            3 1 100px
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 15 -->
+<div class="section">
+
+    <div class="title">15. align-self</div>
+
+    <div class="desc">
+        Отдельное выравнивание элемента.
+    </div>
+
+    <div class="box"
+         style="
+            display:flex;
+            align-items:flex-start;
+            height:180px;
+         ">
+
+        <div class="item">1</div>
+
+        <div class="item"
+             style="
+                align-self:flex-end;
+             ">
+
+            self-end
+
+        </div>
+
+        <div class="item">3</div>
+
+    </div>
+
+</div>
+
+<!-- 16 -->
+<div class="section">
+
+    <div class="title">16. order</div>
+
+    <div class="desc">
+        Изменение порядка элементов.
+    </div>
+
+    <div class="box" style="display:flex;">
+
+        <div class="item" style="order:3;">
+            1
+        </div>
+
+        <div class="item" style="order:1;">
+            2
+        </div>
+
+        <div class="item" style="order:2;">
+            3
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ФИКСИРОВАННАЯ СЕТКА-->
+
+<h1>Модульные FLEX-сетки</h1>
+
+<div class="section">
+
+    <div class="title">
+        Фиксированная сетка
+    </div>
+
+    <div class="desc">
+        Ширина контейнера фиксированная — 960px.
+    </div>
+
+    <div class="grid-fixed">
+
+        <div class="cell">1</div>
+        <div class="cell">2</div>
+        <div class="cell">3</div>
+        <div class="cell">4</div>
+        <div class="cell">5</div>
+        <div class="cell">6</div>
+
+    </div>
+
+</div>
+
+<!--РЕЗИНОВАЯ СЕТКА -->
+
+<div class="section">
+
+    <div class="title">
+        Резиновая сетка
+    </div>
+
+    <div class="desc">
+        Блоки автоматически подстраиваются под ширину экрана.
+    </div>
+
+    <div class="grid-fluid">
+
+        <div class="cell">1</div>
+        <div class="cell">2</div>
+        <div class="cell">3</div>
+        <div class="cell">4</div>
+        <div class="cell">5</div>
+        <div class="cell">6</div>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>
