@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторная работа: Базовый JavaScript</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        console.log("Способ 1: Скрипт загружен и выполнен из секции <head>");
+    </script>
+
+    <script src="data:text/javascript,console.log('Способ 2: Скрипт загружен через атрибут src!')"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Лабораторная работа по JavaScript</h1>
+
+        <section>
+            <h2>Задание 1. Способы внедрения JS (Смотрите консоль F12)</h2>
+            <button onclick="console.log('Способ 3: Сработал инлайновый код из onclick!')">
+                Способ 3 (Инлайн клик)
+            </button>
+
+            <a class="script-link" href="javascript:console.log('Способ 4: Сработал код из атрибута href!');">
+                Способ 4 (Ссылка-скрипт)
+            </a>
+        </section>
+
+        <section>
+            <h2>Задание 2. Интерактивные операторы JS</h2>
+            <p style="font-size: 13px; color: #666; margin-bottom: 10px;">Нажимайте на кнопки, чтобы протестировать каждый оператор:</p>
+            
+            <div class="buttons-grid">
+                <button onclick="demoIf()">1. Оператор if..else</button>
+                <button onclick="demoSwitch()">2. Оператор switch</button>
+                <button onclick="demoFor()">3. Оператор for</button>
+                <button onclick="demoWhile()">4. Оператор while</button>
+                <button onclick="demoDoWhile()">5. Оператор do..while</button>
+                <button onclick="demoBreak()">6. Оператор break</button>
+                <button onclick="demoContinue()">7. Оператор continue</button>
+                <button onclick="demoReturn()">8. Оператор return</button>
+            </div>
+            
+            <div id="output" style="margin-top: 15px; padding: 12px; background: #f1f3f5; border-radius: 4px; font-family: monospace; white-space: pre-wrap; font-size: 13px; color: #212529; border-left: 4px solid #4a5568; display: none;"></div>
+        </section>
+
+        <section>
+            <h2>Задание 3. Диалоговые окна объекта window</h2>
+            <button onclick="runDialogsDemo()">Открыть диалоговые окна</button>
+        </section>
+    </div>
+
+    <script>
+        // Функция-помощник для вывода текста на экран и в консоль
+        function showResult(text) {
+            const outputDiv = document.getElementById("output");
+            outputDiv.style.display = "block";
+            outputDiv.innerHTML = text;
+            console.log(text);
+        }
+
+        // 1. Демонстрация if..else с вводом данных
+        function demoIf() {
+            let age = window.prompt("Оператор if..else. Введите ваш возраст:", "18");
+            if (age === null) return;
+            
+            if (parseInt(age) >= 18) {
+                showResult(`[if..else]: Вам ${age} лет. Доступ разрешен (выполнилась ветка if).`);
+            } else {
+                showResult(`[if..else]: Вам ${age} лет. Доступ ограничен (выполнилась ветка else).`);
+            }
+        }
+
+        // 2. Демонстрация switch с выбором варианта
+        function demoSwitch() {
+            let color = window.prompt("Оператор switch. Введите цвет светофора (красный, желтый, зеленый):", "зеленый");
+            if (color === null) return;
+
+            switch (color.toLowerCase().trim()) {
+                case "красный":
+                    showResult("[switch]: Стой! Движение запрещено.");
+                    break;
+                case "желтый":
+                    showResult("[switch]: Внимание! Приготовься к движению.");
+                    break;
+                case "зеленый":
+                    showResult("[switch]: Иди! Путь открыт.");
+                    break;
+                default:
+                    showResult(`[switch]: Цвет "${color}" не распознан. Сработал блок default.`);
+            }
+        }
+
+        // 3. Демонстрация цикла for
+        function demoFor() {
+            let limit = window.prompt("Цикл for. До скольки посчитать?", "3");
+            if (limit === null) return;
+            
+            let num = parseInt(limit);
+            let res = `[for]: Считаем от 1 до ${num}:\n`;
+            for (let i = 1; i <= num; i++) {
+                res += `  Итерация №${i}\n`;
+            }
+            showResult(res);
+        }
+
+        // 4. Демонстрация цикла while
+        function demoWhile() {
+            let res = "[while]: Цикл выполняется, пока count < 3:\n";
+            let count = 0;
+            while (count < 3) {
+                res += `  count равен ${count}, увеличиваем на 1...\n`;
+                count++;
+            }
+            res += `Цикл завершен, так как count стал равен ${count}`;
+            showResult(res);
+        }
+
+        // 5. Демонстрация do..while (гарантированное выполнение)
+        function demoDoWhile() {
+            let val = 10;
+            let res = "[do..while]: Условие цикла (val < 5) изначально ложно, так как val = 10.\n";
+            do {
+                res += "  -> Тело цикла DO выполнилось 1 раз, несмотря на ложное условие!\n";
+            } while (val < 5);
+            showResult(res);
+        }
+
+        // 6. Демонстрация break
+        function demoBreak() {
+            let res = "[break]: Запущен цикл от 1 до 10. Поставлено прерывание на числе 4:\n";
+            for (let i = 1; i <= 10; i++) {
+                if (i === 4) {
+                    res += `  -> i равно ${i}: срабатывает оператор break. Выходим из цикла!\n`;
+                    break;
+                }
+                res += `  Текущее число: ${i}\n`;
+            }
+            showResult(res);
+        }
+
+        // 7. Демонстрация continue
+        function demoContinue() {
+            let res = "[continue]: Запущен цикл от 1 до 5. Пропускаем число 3:\n";
+            for (let i = 1; i <= 5; i++) {
+                if (i === 3) {
+                    res += `  -> i равно ${i}: срабатывает continue (пропускаем вывод этого числа)\n`;
+                    continue;
+                }
+                res += `  Отображаем число: ${i}\n`;
+            }
+            showResult(res);
+        }
+
+        // 8. Демонстрация return внутри функции
+        function demoReturn() {
+            // Объявляем функцию, возвращающую значение
+            function calculateSquare(x) {
+                return x * x;
+                res += "Этот текст никогда не добавится, так как стоит после return.";
+            }
+
+            let input = window.prompt("Оператор return. Введите число для возведения в квадрат:", "5");
+            if (input === null) return;
+
+            let number = parseInt(input);
+            let resultValue = calculateSquare(number); // Получаем значение из return
+            
+            showResult(`[return]: Функция calculateSquare(${number}) вернула результат: ${resultValue}`);
+        }
+
+        // --- Функция для Задания №3: Диалоговые окна ---
+        function runDialogsDemo() {
+            window.alert("Внимание! Сейчас метод alert() закроется и откроется prompt().");
+            let name = window.prompt("Введите ваше имя:", "Студент");
+
+            if (name === null) {
+                window.alert("Вы нажали 'Отмена' в prompt().");
+                return;
+            }
+
+            let isCorrect = window.confirm("Метод confirm(): Ваше имя действительно " + name + "?");
+            if (isCorrect) {
+                window.alert("Успешно завершено! Привет, " + name + ".");
+            } else {
+                window.alert("Вы выбрали 'Отмена' в confirm().");
+            }
+        }
+    </script>
+</body>
+</html>

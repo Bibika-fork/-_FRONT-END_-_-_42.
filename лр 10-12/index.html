@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Синтаксис и объекты JS</title>
+
+    <script src="script.js"></script>
+
+    <script>
+        function showTime() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            
+            // Форматирование минут, чтобы было 05 вместо 5
+            if (minutes < 10) {
+                minutes = '0' + minutes;
+            }
+            
+            alert("Текущее время: " + hours + ":" + minutes);
+        }
+    </script>
+
+    <script>
+        window.onload = function() {
+            setTimeout(function() {
+                // Получаем размеры экрана
+                var screenWidth = window.screen.width;
+                var screenHeight = window.screen.height;
+                
+                // Открываем новое окно
+                var newWindow = window.open("", "ScreenInfo", "width=400,height=200");
+                
+                // Записываем в него информацию
+                newWindow.document.write("<h3>Информация об экране</h3>");
+                newWindow.document.write("Ширина экрана: " + screenWidth + " px<br>");
+                newWindow.document.write("Высота экрана: " + screenHeight + " px");
+            }, 3000); // 3000 миллисекунд = 3 секунды
+        };
+    </script>
+</head>
+<body>
+
+    <h2>Задание 1: Работа с объектом Date</h2>
+    <button onclick="showTime()">Показать год</button>
+
+    <hr>
+
+    <h2>Задание 2: Операторы организации циклов (while)</h2>
+    <p>Вывод Фамилии и Имени (вариант n = 13, повторений: 13 - 3 = 10):</p>
+    <script>
+        var n = 13; // Ваш номер варианта
+        var count = n - 3; // Количество повторений
+        var i = 0;
+
+        while (i < count) {
+            document.write("Баталенок Яна<br>");
+            i++;
+        }
+    </script>
+
+    <hr>
+
+    <h2>Задание 3: Работа с объектом Array</h2>
+    <script>
+        // Формируем массив из 7 целых элементов
+        var myArray = [12, -5, 3, -2, 8, -4, 7];
+        var product = 1;
+        var hasNegative = false;
+
+        for (var j = 0; j < myArray.length; j++) {
+            if (myArray[j] < 0) {
+                product *= myArray[j];
+                hasNegative = true;
+            }
+        }
+
+        // Если отрицательных элементов нет, произведение будет равно 0
+        if (!hasNegative) product = 0;
+
+        document.write("Массив: [" + myArray.join(", ") + "]<br>");
+        document.write("Произведение отрицательных элементов: " + product);
+    </script>
+
+    <hr>
+
+    <h2>Задание 4: Работа с объектом Math (Внешний файл)</h2>
+    <script>
+        var r = 6; // Заданный радиус
+        // Вызываем функцию из внешнего файла script.js
+        var volume = calculateSphereVolume(r); 
+        
+        document.write("Радиус шара: " + r + "<br>");
+        document.write("Объем шара: " + volume.toFixed(2));
+    </script>
+
+    <hr>
+
+    <h2>Задание 5: Работа со строками STRING</h2>
+    <script>
+        var s1 = "Я люблю Беларусь";
+        var s2 = "Я учусь в Политехническом колледже.";
+        var variantN = 13; // Номер варианта для поиска символа
+
+        // 1. Длина строки S1
+        var lenS1 = s1.length;
+
+        // 2. Выделение n-го символа (индексы в JS начинаются с 0, поэтому n - 1)
+        var charAtN = s1.charAt(variantN - 1);
+        var asciiCode = charAtN.charCodeAt(0);
+
+        // 3. Замена всех букв "ю" на "№"
+        // Используем регулярное выражение с флагом 'g' для замены всех вхождений
+        var replacedS1 = s1.replace(/ю/g, "№");
+
+        // Вывод результатов на страницу
+        document.write("Строка S1: \"" + s1 + "\"<br>");
+        document.write("Строка S2: \"" + s2 + "\"<br><br>");
+        document.write("1. Длина строки S1: " + lenS1 + "<br>");
+        document.write("2. " + variantN + "-й символ в S1: '" + charAtN + "' (ASCII-код: " + asciiCode + ")<br>");
+        document.write("3. Результат замены 'ю' на '№': \"" + replacedS1 + "\"");
+    </script>
+
+</body>
+</html>
